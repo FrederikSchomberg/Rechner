@@ -4,7 +4,6 @@ import java.io.IOException;
 import business.SportvereineModel;
 import javafx.stage.Stage;
 
-
 public class SportvereineControl {
 	private SportvereineModel sportModel;
 	private SportvereineView sportView;
@@ -18,11 +17,11 @@ public class SportvereineControl {
 
 		try {
 			if ("csv".equals(typ)) {
-				sportModel.leseAusCsvDatei();
+				sportModel.leseAusDatei(typ);
 				sportView.zeigeInformationsfensterAn("Der Sportverein wurde gelesen!");
 			} else {
-				sportModel.leseAusTxtDatei();
-				sportView.zeigeInformationsfensterAn("Der Sportverein wurde gelesen!");
+				sportModel.leseAusDatei(typ);
+				sportView.zeigeInformationsfensterAn("Erfolgreich implementiert!");
 			}
 		} catch (IOException exc) {
 			sportView.zeigeFehlermeldungsfensterAn("IOException beim Lesen!");

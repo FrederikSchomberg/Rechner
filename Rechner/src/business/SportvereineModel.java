@@ -1,8 +1,6 @@
 package business;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -26,43 +24,30 @@ public class SportvereineModel {
 
 	}
 
-//	public void leseAusDatei(String typ) throws IOException {
-//
-//		if ("csv".equals(typ)) {
+	public void leseAusDatei(String typ) throws IOException {
+
+		if ("csv".equals(typ)) {
+			ReaderCreator readerCreator = new CsvReaderCreator();
+			ReaderProduct readerProduct = readerCreator.factoryMethod();
+
+			String[] zeile = readerProduct.leseAusDatei();
+			this.sportverein = new Sportverein(zeile[0], zeile[1], Integer.parseInt(zeile[2]),
+					Integer.parseInt(zeile[3]), zeile[4].split("_"));
+			readerProduct.schließeDatei();
 //			BufferedReader ein = new BufferedReader(new FileReader("Sportverein.csv"));
 //			String[] zeile = ein.readLine().split(";");
 //			this.sportverein = new Sportverein(zeile[0], zeile[1], Integer.parseInt(zeile[2]),
 //					Integer.parseInt(zeile[3]), zeile[4].split("_"));
 //			ein.close();
-//		}
-//	}
+		} else {
+			ReaderCreator readerCreator = new TxtReaderCreator();
+			ReaderProduct readerProduct = readerCreator.factoryMethod();
 
-	public void leseAusCsvDatei() throws Exception {
-		ReaderCreator readerCreator = new CsvReaderCreator();
-		// gibt ConcreteCSVReaderProduct zurueck
-		ReaderProduct reader = readerCreator.factoryMethod();
-
-		String[] zeile = reader.leseAusDatei();
-
-		this.sportverein = new Sportverein(zeile[0], zeile[1], Integer.parseInt(zeile[2]), Integer.parseInt(zeile[3]),
-				zeile[4].split("_"));
-
-		reader.schliesseDatei();
-	}
-
-	public void leseAusTxtDatei() throws Exception {
-
-		ReaderCreator readerTXTCreator = new TxtReaderCreator();
-		ReaderProduct readtxt = readerTXTCreator.factoryMethod();
-
-		String[] zeile = readtxt.leseAusDatei();
-
-		this.sportverein = new Sportverein(zeile[0], zeile[1], Integer.parseInt(zeile[2]), Integer.parseInt(zeile[3]),
-				zeile[4].split("_"));
-		;
-
-		readtxt.schliesseDatei();
-
+			String[] zeile = readerProduct.leseAusDatei();
+			this.sportverein = new Sportverein(zeile[0], zeile[1], Integer.parseInt(zeile[2]),
+					Integer.parseInt(zeile[3]), zeile[4].split("_"));
+			readerProduct.schließeDatei();
+		}
 	}
 
 	public Sportverein getSportverein() {

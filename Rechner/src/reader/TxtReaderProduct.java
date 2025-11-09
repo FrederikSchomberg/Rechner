@@ -8,28 +8,27 @@ public class TxtReaderProduct extends ReaderProduct {
 
 	BufferedReader ein;
 
-	public TxtReaderProduct() throws Exception {
+	public TxtReaderProduct() throws IOException {
 		this.ein = new BufferedReader(new FileReader("Sportverein.txt"));
 	}
 
 	@Override
 	public String[] leseAusDatei() throws IOException {
 		String[] arr = new String[5];
-		
+
 		String zeile = this.ein.readLine();
 		int i = 0;
-		while(i < arr.length) {
+		while (i < arr.length) {
 			arr[i] = zeile;
 			zeile = this.ein.readLine();
 			i++;
 		}
 		return arr;
-		
 	}
 
 	@Override
-	public void schliesseDatei() throws IOException {
-		this.ein.close();
+	public void schließeDatei() throws IOException {
+		ein.close();
 
 	}
 
