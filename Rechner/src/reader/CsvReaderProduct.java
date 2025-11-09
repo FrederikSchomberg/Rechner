@@ -5,8 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-import business.Sportverein;
-
 public class CsvReaderProduct extends ReaderProduct {
 
 	private BufferedReader ein;
@@ -21,7 +19,6 @@ public class CsvReaderProduct extends ReaderProduct {
 
 		String[] arr;
 
-		Sportverein sp;
 		try {
 			arr = this.ein.readLine().split(";");
 		} catch (IOException e) {
