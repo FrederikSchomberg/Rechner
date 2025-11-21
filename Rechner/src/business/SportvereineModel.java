@@ -24,30 +24,33 @@ public class SportvereineModel {
 
 	}
 
-	public void leseAusDatei(String typ) throws IOException {
+	public void leseAusCsvDatei() throws IOException {
 
-		if ("csv".equals(typ)) {
-			ReaderCreator readerCreator = new CsvReaderCreator();
-			ReaderProduct readerProduct = readerCreator.factoryMethod();
-
-			String[] zeile = readerProduct.leseAusDatei();
+		
+			ReaderCreator rc = new CsvReaderCreator();
+			ReaderProduct rp = rc.factoryMethod();
+			String[] zeile = rp.leseAusDatei();
 			this.sportverein = new Sportverein(zeile[0], zeile[1], Integer.parseInt(zeile[2]),
 					Integer.parseInt(zeile[3]), zeile[4].split("_"));
-			readerProduct.schließeDatei();
+			rp.schliesseDatei();
+			
+
 //			BufferedReader ein = new BufferedReader(new FileReader("Sportverein.csv"));
 //			String[] zeile = ein.readLine().split(";");
 //			this.sportverein = new Sportverein(zeile[0], zeile[1], Integer.parseInt(zeile[2]),
 //					Integer.parseInt(zeile[3]), zeile[4].split("_"));
 //			ein.close();
-		} else {
-			ReaderCreator readerCreator = new TxtReaderCreator();
-			ReaderProduct readerProduct = readerCreator.factoryMethod();
+		
+	}
+	
+	public void leseAusTxtDatei() throws IOException {
 
-			String[] zeile = readerProduct.leseAusDatei();
-			this.sportverein = new Sportverein(zeile[0], zeile[1], Integer.parseInt(zeile[2]),
-					Integer.parseInt(zeile[3]), zeile[4].split("_"));
-			readerProduct.schließeDatei();
-		}
+		ReaderCreator rc = new TxtReaderCreator();
+		ReaderProduct rp = rc.factoryMethod();
+		String[] zeile = rp.leseAusDatei();
+		this.sportverein = new Sportverein(zeile[0], zeile[1], Integer.parseInt(zeile[2]),
+				Integer.parseInt(zeile[3]), zeile[4].split("_"));
+		rp.schliesseDatei();
 	}
 
 	public Sportverein getSportverein() {

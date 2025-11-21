@@ -17,11 +17,11 @@ public class SportvereineControl {
 
 		try {
 			if ("csv".equals(typ)) {
-				sportModel.leseAusDatei(typ);
+				sportModel.leseAusCsvDatei();
 				sportView.zeigeInformationsfensterAn("Der Sportverein wurde gelesen!");
 			} else {
-				sportModel.leseAusDatei(typ);
-				sportView.zeigeInformationsfensterAn("Erfolgreich implementiert!");
+				sportModel.leseAusTxtDatei();
+				sportView.zeigeInformationsfensterAn("implementiert!");
 			}
 		} catch (IOException exc) {
 			sportView.zeigeFehlermeldungsfensterAn("IOException beim Lesen!");
